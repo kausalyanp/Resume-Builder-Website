@@ -38,10 +38,7 @@ This web app allows users to **create, preview, and download** stunning resumes 
 
 | Resume Builder | Portfolio Builder | PDF Export |
 |----------------|------------------|-------------|
-| ![Resume Builder](<img width="1758" height="938" alt="image" src="https://github.com/user-attachments/assets/033bd75e-5cd0-4acf-8b1b-acfcfc6909f1" />
-) | ![Portfolio](<img width="1746" height="926" alt="image" src="https://github.com/user-attachments/assets/f186f3a0-a8d5-4c89-bf27-9c3569477e7b" />
-) | ![PDF Export](<img width="1722" height="853" alt="image" src="https://github.com/user-attachments/assets/4218c606-15a9-45f6-a98d-0672aa76bffe" />
-) |
+| ![Resume Builder](<img width="1758" height="938" alt="image" src="https://github.com/user-attachments/assets/033bd75e-5cd0-4acf-8b1b-acfcfc6909f1" />) | ![Portfolio](<img width="1746" height="926" alt="image" src="https://github.com/user-attachments/assets/f186f3a0-a8d5-4c89-bf27-9c3569477e7b" />) | ![PDF Export](<img width="1722" height="853" alt="image" src="https://github.com/user-attachments/assets/4218c606-15a9-45f6-a98d-0672aa76bffe" />) |
 
 > 📸 *Screenshots are for illustration — update with your actual project images.*
 
