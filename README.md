@@ -79,18 +79,31 @@ src/
 │ └── PDFExportButton.jsx
 
 ├── pages/
+
 │ ├── Home.jsx
+
 │ ├── ResumeBuilder.jsx
+
 │ ├── PortfolioBuilder.jsx
+
 │ ├── Preview.jsx
+
 │ └── Settings.jsx
+
 ├── styles/
+
 │ ├── global.css
+
 │ ├── variables.css
+
 │ └── templates.css
+
 ├── utils/
+
 │ └── pdfGenerator.js
+
 ├── App.js
+
 └── index.js
 
 
