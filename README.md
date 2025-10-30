@@ -152,9 +152,10 @@ npm run build
   "lucide-react": "^0.300.0"
 }
 ```
-###🧑‍🎨 Author
+---
+### 🧑‍🎨 Author
 
-##👩‍💻 Kausalya N P
+Kausalya N P
 Frontend Developer | Creative Technologist | Aspiring Entrepreneur
 
 
