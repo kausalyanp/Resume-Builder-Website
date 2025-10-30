@@ -61,14 +61,23 @@ This web app allows users to **create, preview, and download** stunning resumes 
 ## 🧩 Project Structure
 src/
 ├── components/
+
 │ ├── ResumeForm.jsx
+
 │ ├── ResumePreview.jsx
+
 │ ├── TemplateSelector.jsx
+
 │ ├── PortfolioForm.jsx
+
 │ ├── PortfolioPreview.jsx
+
 │ ├── Sidebar.jsx
+
 │ ├── Navbar.jsx
+
 │ └── PDFExportButton.jsx
+
 ├── pages/
 │ ├── Home.jsx
 │ ├── ResumeBuilder.jsx
@@ -156,46 +165,8 @@ npm run build
 ### 🧑‍🎨 Author
 
 Kausalya N P
+
 Frontend Developer | Creative Technologist | Aspiring Entrepreneur
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 # React + Vite
 
