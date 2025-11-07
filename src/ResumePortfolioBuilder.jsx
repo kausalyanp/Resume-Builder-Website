@@ -180,6 +180,537 @@ const ResumePortfolioBuilder = () => {
     }
   };
 
+  // Render different template layouts
+  const renderClassicLayout = () => (
+    <>
+      {/* Header */}
+      <div className="text-center mb-6 pb-6 border-b-2" style={{ borderColor: customization.primaryColor }}>
+        {profileImage && (
+          <img src={profileImage} alt="Profile" className="w-24 h-24 rounded-full object-cover mx-auto mb-4 shadow-lg" />
+        )}
+        <h1 className="text-3xl font-bold text-gray-800 mb-2">
+          {resumeData.personal.name || 'Your Name'}
+        </h1>
+        <p className="text-lg mb-3" style={{ color: customization.primaryColor }}>
+          {resumeData.personal.title || 'Professional Title'}
+        </p>
+        <div className="flex flex-wrap justify-center gap-4 text-sm text-gray-600">
+          {resumeData.personal.email && <span>📧 {resumeData.personal.email}</span>}
+          {resumeData.personal.phone && <span>📱 {resumeData.personal.phone}</span>}
+          {resumeData.personal.location && <span>📍 {resumeData.personal.location}</span>}
+        </div>
+      </div>
+
+      {/* About */}
+      {resumeData.personal.about && (
+        <div className="mb-6">
+          <h2 className="text-xl font-bold mb-3 text-gray-800" style={{ color: customization.primaryColor }}>ABOUT ME</h2>
+          <p className="text-gray-700 leading-relaxed">{resumeData.personal.about}</p>
+        </div>
+      )}
+
+      {/* Experience */}
+      {resumeData.experience.length > 0 && (
+        <div className="mb-6">
+          <h2 className="text-xl font-bold mb-3 text-gray-800" style={{ color: customization.primaryColor }}>EXPERIENCE</h2>
+          {resumeData.experience.map((exp, idx) => (
+            <div key={idx} className="mb-4">
+              <div className="flex justify-between items-start mb-1">
+                <h3 className="text-lg font-semibold">{exp.title}</h3>
+                <span className="text-sm text-gray-600">{exp.duration}</span>
+              </div>
+              <p className="font-medium mb-2" style={{ color: customization.primaryColor }}>{exp.company}</p>
+              <p className="text-gray-700 text-sm">{exp.description}</p>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Education */}
+      {resumeData.education.length > 0 && (
+        <div className="mb-6">
+          <h2 className="text-xl font-bold mb-3 text-gray-800" style={{ color: customization.primaryColor }}>EDUCATION</h2>
+          {resumeData.education.map((edu, idx) => (
+            <div key={idx} className="mb-3">
+              <div className="flex justify-between items-start mb-1">
+                <h3 className="text-lg font-semibold">{edu.degree}</h3>
+                <span className="text-sm text-gray-600">{edu.year}</span>
+              </div>
+              <p className="font-medium" style={{ color: customization.primaryColor }}>{edu.institution}</p>
+              {edu.gpa && <p className="text-sm text-gray-600">GPA: {edu.gpa}</p>}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Skills */}
+      {resumeData.skills.length > 0 && (
+        <div className="mb-6">
+          <h2 className="text-xl font-bold mb-3 text-gray-800" style={{ color: customization.primaryColor }}>SKILLS</h2>
+          <div className="space-y-3">
+            {resumeData.skills.map((skill, idx) => (
+              <div key={idx}>
+                <div className="flex justify-between mb-1">
+                  <span className="font-medium">{skill.name}</span>
+                  <span className="text-sm text-gray-600">{skill.level}%</span>
+                </div>
+                <div className="w-full bg-gray-200 rounded-full h-2">
+                  <div className="h-2 rounded-full" style={{ width: `${skill.level}%`, backgroundColor: customization.primaryColor }} />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Projects */}
+      {resumeData.projects.length > 0 && (
+        <div className="mb-6">
+          <h2 className="text-xl font-bold mb-3 text-gray-800" style={{ color: customization.primaryColor }}>PROJECTS</h2>
+          {resumeData.projects.map((project, idx) => (
+            <div key={idx} className="mb-3">
+              <h3 className="text-lg font-semibold mb-1">{project.title}</h3>
+              <p className="text-gray-700 text-sm mb-1">{project.description}</p>
+              {project.technologies && <p className="text-sm" style={{ color: customization.primaryColor }}>Technologies: {project.technologies}</p>}
+            </div>
+          ))}
+        </div>
+      )}
+    </>
+  );
+
+  const renderModernLayout = () => (
+    <div className="flex gap-6">
+      {/* Left Sidebar - 35% */}
+      <div className="w-[35%] pr-6 border-r-2" style={{ borderColor: customization.primaryColor }}>
+        {/* Profile */}
+        <div className="mb-6">
+          {profileImage && (
+            <img src={profileImage} alt="Profile" className="w-full aspect-square rounded-lg object-cover mb-4 shadow-lg" />
+          )}
+          <h1 className="text-2xl font-bold text-gray-800 mb-1">
+            {resumeData.personal.name || 'Your Name'}
+          </h1>
+          <p className="text-base font-medium mb-3" style={{ color: customization.primaryColor }}>
+            {resumeData.personal.title || 'Professional Title'}
+          </p>
+        </div>
+
+        {/* Contact */}
+        <div className="mb-6">
+          <h2 className="text-sm font-bold mb-3 text-gray-800 uppercase tracking-wide">Contact</h2>
+          <div className="space-y-2 text-xs text-gray-700">
+            {resumeData.personal.email && <div className="flex items-start gap-2"><span>📧</span><span className="break-all">{resumeData.personal.email}</span></div>}
+            {resumeData.personal.phone && <div className="flex items-start gap-2"><span>📱</span><span>{resumeData.personal.phone}</span></div>}
+            {resumeData.personal.location && <div className="flex items-start gap-2"><span>📍</span><span>{resumeData.personal.location}</span></div>}
+          </div>
+        </div>
+
+        {/* Skills */}
+        {resumeData.skills.length > 0 && (
+          <div className="mb-6">
+            <h2 className="text-sm font-bold mb-3 text-gray-800 uppercase tracking-wide">Skills</h2>
+            <div className="space-y-2">
+              {resumeData.skills.map((skill, idx) => (
+                <div key={idx}>
+                  <div className="flex justify-between mb-1 text-xs">
+                    <span className="font-medium">{skill.name}</span>
+                    <span className="text-gray-600">{skill.level}%</span>
+                  </div>
+                  <div className="w-full bg-gray-200 rounded-full h-1.5">
+                    <div className="h-1.5 rounded-full" style={{ width: `${skill.level}%`, backgroundColor: customization.primaryColor }} />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Education */}
+        {resumeData.education.length > 0 && (
+          <div className="mb-6">
+            <h2 className="text-sm font-bold mb-3 text-gray-800 uppercase tracking-wide">Education</h2>
+            {resumeData.education.map((edu, idx) => (
+              <div key={idx} className="mb-3 text-xs">
+                <h3 className="font-semibold text-sm">{edu.degree}</h3>
+                <p className="font-medium" style={{ color: customization.primaryColor }}>{edu.institution}</p>
+                <p className="text-gray-600">{edu.year}</p>
+                {edu.gpa && <p className="text-gray-600">GPA: {edu.gpa}</p>}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* Right Content - 65% */}
+      <div className="flex-1">
+        {/* About */}
+        {resumeData.personal.about && (
+          <div className="mb-6">
+            <h2 className="text-lg font-bold mb-3 text-gray-800 uppercase tracking-wide" style={{ color: customization.primaryColor }}>About Me</h2>
+            <p className="text-gray-700 leading-relaxed text-sm">{resumeData.personal.about}</p>
+          </div>
+        )}
+
+        {/* Experience */}
+        {resumeData.experience.length > 0 && (
+          <div className="mb-6">
+            <h2 className="text-lg font-bold mb-3 text-gray-800 uppercase tracking-wide" style={{ color: customization.primaryColor }}>Experience</h2>
+            {resumeData.experience.map((exp, idx) => (
+              <div key={idx} className="mb-4 relative pl-4 border-l-2" style={{ borderColor: customization.primaryColor }}>
+                <div className="flex justify-between items-start mb-1">
+                  <h3 className="font-semibold">{exp.title}</h3>
+                  <span className="text-xs text-gray-600 whitespace-nowrap ml-2">{exp.duration}</span>
+                </div>
+                <p className="font-medium text-sm mb-2" style={{ color: customization.primaryColor }}>{exp.company}</p>
+                <p className="text-gray-700 text-sm">{exp.description}</p>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Projects */}
+        {resumeData.projects.length > 0 && (
+          <div className="mb-6">
+            <h2 className="text-lg font-bold mb-3 text-gray-800 uppercase tracking-wide" style={{ color: customization.primaryColor }}>Projects</h2>
+            {resumeData.projects.map((project, idx) => (
+              <div key={idx} className="mb-3">
+                <h3 className="font-semibold mb-1">{project.title}</h3>
+                <p className="text-gray-700 text-sm mb-1">{project.description}</p>
+                {project.technologies && <p className="text-xs" style={{ color: customization.primaryColor }}>Technologies: {project.technologies}</p>}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+
+  const renderCreativeLayout = () => (
+    <div className="flex gap-0">
+      {/* Left Panel - 30% with colored background */}
+      <div className="w-[30%] p-6 text-white" style={{ backgroundColor: customization.primaryColor }}>
+        {/* Profile */}
+        {profileImage && (
+          <img src={profileImage} alt="Profile" className="w-full aspect-square rounded-full object-cover mb-4 shadow-lg border-4 border-white" />
+        )}
+        
+        <h1 className="text-2xl font-bold mb-1">
+          {resumeData.personal.name || 'Your Name'}
+        </h1>
+        <p className="text-sm mb-4 opacity-90">
+          {resumeData.personal.title || 'Professional Title'}
+        </p>
+
+        {/* Contact */}
+        <div className="mb-6 pb-4 border-b border-white/30">
+          <h2 className="text-xs font-bold mb-3 uppercase tracking-wide opacity-75">Contact</h2>
+          <div className="space-y-2 text-xs">
+            {resumeData.personal.email && <div className="break-all opacity-90">{resumeData.personal.email}</div>}
+            {resumeData.personal.phone && <div className="opacity-90">{resumeData.personal.phone}</div>}
+            {resumeData.personal.location && <div className="opacity-90">{resumeData.personal.location}</div>}
+          </div>
+        </div>
+
+        {/* Skills */}
+        {resumeData.skills.length > 0 && (
+          <div className="mb-6">
+            <h2 className="text-xs font-bold mb-3 uppercase tracking-wide opacity-75">Skills</h2>
+            <div className="space-y-3">
+              {resumeData.skills.map((skill, idx) => (
+                <div key={idx}>
+                  <div className="flex justify-between mb-1 text-xs">
+                    <span>{skill.name}</span>
+                    <span className="opacity-75">{skill.level}%</span>
+                  </div>
+                  <div className="w-full bg-white/20 rounded-full h-1.5">
+                    <div className="h-1.5 rounded-full bg-white" style={{ width: `${skill.level}%` }} />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Right Content - 70% */}
+      <div className="flex-1 p-6 bg-white">
+        {/* About */}
+        {resumeData.personal.about && (
+          <div className="mb-6">
+            <h2 className="text-lg font-bold mb-3 text-gray-800 pb-2 border-b-2" style={{ borderColor: customization.primaryColor }}>ABOUT</h2>
+            <p className="text-gray-700 leading-relaxed text-sm">{resumeData.personal.about}</p>
+          </div>
+        )}
+
+        {/* Experience */}
+        {resumeData.experience.length > 0 && (
+          <div className="mb-6">
+            <h2 className="text-lg font-bold mb-3 text-gray-800 pb-2 border-b-2" style={{ borderColor: customization.primaryColor }}>EXPERIENCE</h2>
+            {resumeData.experience.map((exp, idx) => (
+              <div key={idx} className="mb-4">
+                <div className="flex justify-between items-start mb-1">
+                  <h3 className="font-bold">{exp.title}</h3>
+                  <span className="text-xs text-gray-600 ml-2">{exp.duration}</span>
+                </div>
+                <p className="font-semibold text-sm mb-2" style={{ color: customization.primaryColor }}>{exp.company}</p>
+                <p className="text-gray-700 text-sm">{exp.description}</p>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Education */}
+        {resumeData.education.length > 0 && (
+          <div className="mb-6">
+            <h2 className="text-lg font-bold mb-3 text-gray-800 pb-2 border-b-2" style={{ borderColor: customization.primaryColor }}>EDUCATION</h2>
+            {resumeData.education.map((edu, idx) => (
+              <div key={idx} className="mb-3">
+                <div className="flex justify-between items-start mb-1">
+                  <h3 className="font-semibold">{edu.degree}</h3>
+                  <span className="text-xs text-gray-600">{edu.year}</span>
+                </div>
+                <p className="font-medium text-sm" style={{ color: customization.primaryColor }}>{edu.institution}</p>
+                {edu.gpa && <p className="text-xs text-gray-600">GPA: {edu.gpa}</p>}
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Projects */}
+        {resumeData.projects.length > 0 && (
+          <div className="mb-6">
+            <h2 className="text-lg font-bold mb-3 text-gray-800 pb-2 border-b-2" style={{ borderColor: customization.primaryColor }}>PROJECTS</h2>
+            {resumeData.projects.map((project, idx) => (
+              <div key={idx} className="mb-3">
+                <h3 className="font-semibold mb-1">{project.title}</h3>
+                <p className="text-gray-700 text-sm mb-1">{project.description}</p>
+                {project.technologies && <p className="text-xs" style={{ color: customization.primaryColor }}>Tech: {project.technologies}</p>}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+
+  const renderMinimalLayout = () => (
+    <div className="max-w-3xl mx-auto">
+      {/* Header - Centered */}
+      <div className="text-center mb-8">
+        {profileImage && (
+          <img src={profileImage} alt="Profile" className="w-20 h-20 rounded-full object-cover mx-auto mb-3 shadow-md" />
+        )}
+        <h1 className="text-4xl font-light text-gray-800 mb-2" style={{ letterSpacing: '0.05em' }}>
+          {resumeData.personal.name || 'YOUR NAME'}
+        </h1>
+        <p className="text-base mb-3 font-light" style={{ color: customization.primaryColor }}>
+          {resumeData.personal.title || 'Professional Title'}
+        </p>
+        <div className="flex justify-center gap-4 text-xs text-gray-600">
+          {resumeData.personal.email && <span>{resumeData.personal.email}</span>}
+          {resumeData.personal.phone && <span>•</span>}
+          {resumeData.personal.phone && <span>{resumeData.personal.phone}</span>}
+          {resumeData.personal.location && <span>•</span>}
+          {resumeData.personal.location && <span>{resumeData.personal.location}</span>}
+        </div>
+      </div>
+
+      {/* About */}
+      {resumeData.personal.about && (
+        <div className="mb-8">
+          <p className="text-gray-700 leading-relaxed text-center text-sm italic">{resumeData.personal.about}</p>
+        </div>
+      )}
+
+      {/* Experience */}
+      {resumeData.experience.length > 0 && (
+        <div className="mb-8">
+          <h2 className="text-sm font-bold mb-4 text-gray-800 text-center uppercase tracking-widest pb-2 border-b">Experience</h2>
+          {resumeData.experience.map((exp, idx) => (
+            <div key={idx} className="mb-6">
+              <div className="text-center mb-2">
+                <h3 className="font-semibold text-lg">{exp.title}</h3>
+                <p className="text-sm" style={{ color: customization.primaryColor }}>{exp.company}</p>
+                <span className="text-xs text-gray-500">{exp.duration}</span>
+              </div>
+              <p className="text-gray-700 text-sm text-center leading-relaxed">{exp.description}</p>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Education */}
+      {resumeData.education.length > 0 && (
+        <div className="mb-8">
+          <h2 className="text-sm font-bold mb-4 text-gray-800 text-center uppercase tracking-widest pb-2 border-b">Education</h2>
+          {resumeData.education.map((edu, idx) => (
+            <div key={idx} className="mb-4 text-center">
+              <h3 className="font-semibold">{edu.degree}</h3>
+              <p className="text-sm" style={{ color: customization.primaryColor }}>{edu.institution}</p>
+              <p className="text-xs text-gray-600">{edu.year} {edu.gpa && `• GPA: ${edu.gpa}`}</p>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Skills */}
+      {resumeData.skills.length > 0 && (
+        <div className="mb-8">
+          <h2 className="text-sm font-bold mb-4 text-gray-800 text-center uppercase tracking-widest pb-2 border-b">Skills</h2>
+          <div className="flex flex-wrap justify-center gap-2">
+            {resumeData.skills.map((skill, idx) => (
+              <span key={idx} className="px-3 py-1 text-xs border rounded-full" style={{ borderColor: customization.primaryColor, color: customization.primaryColor }}>
+                {skill.name}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Projects */}
+      {resumeData.projects.length > 0 && (
+        <div className="mb-8">
+          <h2 className="text-sm font-bold mb-4 text-gray-800 text-center uppercase tracking-widest pb-2 border-b">Projects</h2>
+          {resumeData.projects.map((project, idx) => (
+            <div key={idx} className="mb-4 text-center">
+              <h3 className="font-semibold mb-1">{project.title}</h3>
+              <p className="text-gray-700 text-sm mb-1">{project.description}</p>
+              {project.technologies && <p className="text-xs" style={{ color: customization.primaryColor }}>{project.technologies}</p>}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+
+  const renderProfessionalLayout = () => (
+    <div className="relative">
+      {/* Accent Bar */}
+      <div className="absolute left-0 top-0 w-2 h-full" style={{ backgroundColor: customization.primaryColor }}></div>
+      
+      <div className="pl-8">
+        {/* Header */}
+        <div className="flex items-start gap-6 mb-6 pb-6 border-b">
+          {profileImage && (
+            <img src={profileImage} alt="Profile" className="w-24 h-24 rounded object-cover shadow-md" />
+          )}
+          <div className="flex-1">
+            <h1 className="text-3xl font-bold text-gray-800 mb-1">
+              {resumeData.personal.name || 'Your Name'}
+            </h1>
+            <p className="text-lg mb-2" style={{ color: customization.primaryColor }}>
+              {resumeData.personal.title || 'Professional Title'}
+            </p>
+            <div className="flex flex-wrap gap-3 text-xs text-gray-600">
+              {resumeData.personal.email && <span>{resumeData.personal.email}</span>}
+              {resumeData.personal.phone && <span>|</span>}
+              {resumeData.personal.phone && <span>{resumeData.personal.phone}</span>}
+              {resumeData.personal.location && <span>|</span>}
+              {resumeData.personal.location && <span>{resumeData.personal.location}</span>}
+            </div>
+          </div>
+        </div>
+
+        {/* About */}
+        {resumeData.personal.about && (
+          <div className="mb-6">
+            <h2 className="text-base font-bold mb-2 text-gray-800 flex items-center gap-2">
+              <div className="w-1 h-5" style={{ backgroundColor: customization.primaryColor }}></div>
+              PROFESSIONAL SUMMARY
+            </h2>
+            <p className="text-gray-700 leading-relaxed text-sm ml-3">{resumeData.personal.about}</p>
+          </div>
+        )}
+
+        {/* Experience */}
+        {resumeData.experience.length > 0 && (
+          <div className="mb-6">
+            <h2 className="text-base font-bold mb-3 text-gray-800 flex items-center gap-2">
+              <div className="w-1 h-5" style={{ backgroundColor: customization.primaryColor }}></div>
+              WORK EXPERIENCE
+            </h2>
+            <div className="ml-3 space-y-4">
+              {resumeData.experience.map((exp, idx) => (
+                <div key={idx}>
+                  <div className="flex justify-between items-start mb-1">
+                    <h3 className="font-bold">{exp.title}</h3>
+                    <span className="text-xs text-gray-600 ml-2 whitespace-nowrap">{exp.duration}</span>
+                  </div>
+                  <p className="font-semibold text-sm mb-2" style={{ color: customization.primaryColor }}>{exp.company}</p>
+                  <p className="text-gray-700 text-sm">{exp.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <div className="grid grid-cols-2 gap-6">
+          {/* Education */}
+          {resumeData.education.length > 0 && (
+            <div className="mb-6">
+              <h2 className="text-base font-bold mb-3 text-gray-800 flex items-center gap-2">
+                <div className="w-1 h-5" style={{ backgroundColor: customization.primaryColor }}></div>
+                EDUCATION
+              </h2>
+              <div className="ml-3 space-y-3">
+                {resumeData.education.map((edu, idx) => (
+                  <div key={idx}>
+                    <h3 className="font-semibold text-sm">{edu.degree}</h3>
+                    <p className="text-sm" style={{ color: customization.primaryColor }}>{edu.institution}</p>
+                    <p className="text-xs text-gray-600">{edu.year} {edu.gpa && `• ${edu.gpa}`}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Skills */}
+          {resumeData.skills.length > 0 && (
+            <div className="mb-6">
+              <h2 className="text-base font-bold mb-3 text-gray-800 flex items-center gap-2">
+                <div className="w-1 h-5" style={{ backgroundColor: customization.primaryColor }}></div>
+                SKILLS
+              </h2>
+              <div className="ml-3 space-y-2">
+                {resumeData.skills.map((skill, idx) => (
+                  <div key={idx}>
+                    <div className="flex justify-between mb-1 text-xs">
+                      <span className="font-medium">{skill.name}</span>
+                      <span className="text-gray-600">{skill.level}%</span>
+                    </div>
+                    <div className="w-full bg-gray-200 rounded h-1.5">
+                      <div className="h-1.5 rounded" style={{ width: `${skill.level}%`, backgroundColor: customization.primaryColor }} />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Projects */}
+        {resumeData.projects.length > 0 && (
+          <div className="mb-6">
+            <h2 className="text-base font-bold mb-3 text-gray-800 flex items-center gap-2">
+              <div className="w-1 h-5" style={{ backgroundColor: customization.primaryColor }}></div>
+              PROJECTS
+            </h2>
+            <div className="ml-3 space-y-3">
+              {resumeData.projects.map((project, idx) => (
+                <div key={idx}>
+                  <h3 className="font-semibold mb-1">{project.title}</h3>
+                  <p className="text-gray-700 text-sm mb-1">{project.description}</p>
+                  {project.technologies && <p className="text-xs" style={{ color: customization.primaryColor }}>Technologies: {project.technologies}</p>}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+
   const downloadPDF = async () => {
     try {
       // Dynamically import html2canvas and jsPDF from CDN
@@ -206,7 +737,7 @@ const ResumePortfolioBuilder = () => {
       // Apply PDF-optimized styles temporarily
       element.style.maxHeight = 'none';
       element.style.overflow = 'visible';
-      element.style.fontSize = '16px'; // Set base font to 12px for PDF
+      element.style.fontSize = '12px'; // Set base font to 12px for PDF
       
       // Scale down all text elements for PDF
       const allElements = element.querySelectorAll('*');
@@ -221,27 +752,28 @@ const ResumePortfolioBuilder = () => {
           margin: el.style.margin
         };
         
-        // Apply PDF-friendly sizes
-        const currentSize = parseFloat(computedStyle.fontSize);
-        if (currentSize) {
-          // Scale down by 40% for PDF (makes it more professional)
-          el.style.fontSize = `${currentSize * 0.8}px`;
-        }
+        // // Apply PDF-friendly sizes
+        // const currentSize = parseFloat(computedStyle.fontSize);
+        // if (currentSize) {
+        //   // Scale down by 30% for PDF (0.7 = 70% of original size)
+        //   // This gives better readability - approximately 12-14px for body text
+        //   el.style.fontSize = `${currentSize * 1}px`;
+        // }
         
         // Adjust line heights
         if (computedStyle.lineHeight !== 'normal') {
-          el.style.lineHeight = '1.5';
+          el.style.lineHeight = '1.6';
         }
         
         // Reduce padding/margins slightly
         const currentPadding = parseFloat(computedStyle.padding);
         if (currentPadding > 0) {
-          el.style.padding = `${currentPadding * 0.7}px`;
+          el.style.padding = `${currentPadding * 0.9}px`;
         }
         
         const currentMargin = parseFloat(computedStyle.marginBottom);
         if (currentMargin > 0) {
-          el.style.marginBottom = `${currentMargin * 0.7}px`;
+          el.style.marginBottom = `${currentMargin * 0.9}px`;
         }
       });
 
@@ -280,25 +812,57 @@ const ResumePortfolioBuilder = () => {
         compress: true
       });
 
+      // Define separate margins (in mm)
+      const marginTop = 0;    // keep current top space
+      const marginRight = 10;  // keep current right space
+      const marginBottom = 15; // increase bottom space
+      const marginLeft = 0;   // add left gap
+
       const pdfWidth = 210; // A4 width in mm
       const pdfHeight = 297; // A4 height in mm
-      const imgWidth = pdfWidth;
-      const imgHeight = (canvas.height * pdfWidth) / canvas.width;
-      
+
+      // Compute usable drawing width/height
+      const usableWidth = pdfWidth - marginLeft - marginRight;
+      const usableHeight = pdfHeight - marginTop - marginBottom;
+
+      // Maintain aspect ratio
+      const imgWidth = usableWidth;
+      const imgHeight = (canvas.height * usableWidth) / canvas.width;
+
       let heightLeft = imgHeight;
-      let position = 0;
+      let position = marginTop;
 
-      // Add first page
-      pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight, undefined, 'FAST');
-      heightLeft -= pdfHeight;
+      // Add first page with left/top margins
+      pdf.addImage(
+        imgData,
+        'PNG',
+        marginLeft,
+        position,
+        imgWidth,
+        imgHeight,
+        undefined,
+        'FAST'
+      );
 
-      // Add additional pages if content is longer
+      heightLeft -= usableHeight;
+
+      // Handle multiple pages if needed
       while (heightLeft > 0) {
-        position -= pdfHeight;
+        position = heightLeft - imgHeight + marginTop;
         pdf.addPage();
-        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight, undefined, 'FAST');
-        heightLeft -= pdfHeight;
+        pdf.addImage(
+          imgData,
+          'PNG',
+          marginLeft,
+          position,
+          imgWidth,
+          imgHeight,
+          undefined,
+          'FAST'
+        );
+        heightLeft -= usableHeight;
       }
+
 
       // Download the PDF
       const fileName = resumeData.personal.name ? `${resumeData.personal.name.replace(/\s+/g, '_')}_resume.pdf` : 'resume.pdf';
@@ -321,21 +885,23 @@ const ResumePortfolioBuilder = () => {
   const templates = {
     classic: {
       name: 'Classic',
-      bg: 'bg-white',
-      headerBg: 'bg-gray-100',
-      textColor: 'text-gray-800'
+      description: 'Traditional single-column layout'
     },
     modern: {
-      name: 'Modern',
-      bg: 'bg-gradient-to-br from-blue-50 to-indigo-50',
-      headerBg: 'bg-white',
-      textColor: 'text-gray-900'
+      name: 'Modern Two-Column',
+      description: 'Sidebar with main content area'
     },
     creative: {
-      name: 'Creative',
-      bg: 'bg-gradient-to-br from-purple-50 to-pink-50',
-      headerBg: 'bg-white',
-      textColor: 'text-gray-900'
+      name: 'Creative Split',
+      description: 'Bold left panel with content right'
+    },
+    minimal: {
+      name: 'Minimal',
+      description: 'Clean and simple centered layout'
+    },
+    professional: {
+      name: 'Professional',
+      description: 'Corporate style with accent bar'
     }
   };
 
@@ -751,25 +1317,84 @@ const ResumePortfolioBuilder = () => {
                     <button
                       key={key}
                       onClick={() => setSelectedTemplate(key)}
-                      className={`w-full p-6 rounded-xl text-left transition-all ${
+                      className={`w-full p-5 rounded-xl text-left transition-all ${
                         selectedTemplate === key
                           ? 'ring-4 ring-blue-500 shadow-lg'
                           : darkMode ? 'bg-gray-700 hover:bg-gray-600' : 'bg-white hover:shadow-md'
                       }`}
                     >
-                      <div className="flex items-center justify-between mb-2">
-                        <h4 className="text-xl font-bold">{template.name}</h4>
+                      <div className="flex items-start justify-between mb-3">
+                        <div>
+                          <h4 className="text-lg font-bold mb-1">{template.name}</h4>
+                          <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>{template.description}</p>
+                        </div>
                         {selectedTemplate === key && (
-                          <div className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center">
+                          <div className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
                             <Eye className="w-4 h-4 text-white" />
                           </div>
                         )}
                       </div>
-                      <div className={`h-32 ${template.bg} ${template.headerBg} rounded-lg border-2 ${selectedTemplate === key ? 'border-blue-500' : 'border-gray-300'}`}>
-                        <div className="p-4">
-                          <div className="h-2 bg-gray-400 rounded w-3/4 mb-2"></div>
-                          <div className="h-2 bg-gray-300 rounded w-1/2"></div>
-                        </div>
+                      {/* Template Preview Thumbnail */}
+                      <div className={`h-40 bg-white rounded-lg border-2 overflow-hidden ${selectedTemplate === key ? 'border-blue-500' : 'border-gray-300'}`}>
+                        {key === 'classic' && (
+                          <div className="p-4 text-center">
+                            <div className="w-10 h-10 bg-gray-300 rounded-full mx-auto mb-2"></div>
+                            <div className="h-2 bg-gray-400 rounded w-2/3 mx-auto mb-1"></div>
+                            <div className="h-1.5 bg-gray-300 rounded w-1/2 mx-auto mb-3"></div>
+                            <div className="h-1 bg-gray-300 rounded w-full mb-1"></div>
+                            <div className="h-1 bg-gray-300 rounded w-5/6 mb-1"></div>
+                          </div>
+                        )}
+                        {key === 'modern' && (
+                          <div className="flex h-full">
+                            <div className="w-1/3 bg-gray-200 p-2">
+                              <div className="w-full h-8 bg-gray-300 rounded mb-2"></div>
+                              <div className="h-1 bg-gray-400 rounded w-full mb-1"></div>
+                              <div className="h-1 bg-gray-400 rounded w-4/5 mb-1"></div>
+                            </div>
+                            <div className="flex-1 p-2">
+                              <div className="h-1.5 bg-gray-400 rounded w-3/4 mb-2"></div>
+                              <div className="h-1 bg-gray-300 rounded w-full mb-1"></div>
+                              <div className="h-1 bg-gray-300 rounded w-5/6 mb-1"></div>
+                            </div>
+                          </div>
+                        )}
+                        {key === 'creative' && (
+                          <div className="flex h-full">
+                            <div className="w-1/3 p-2" style={{ backgroundColor: customization.primaryColor + '40' }}>
+                              <div className="w-full h-8 bg-white rounded-full mb-2"></div>
+                              <div className="h-1 bg-white rounded w-full mb-1"></div>
+                            </div>
+                            <div className="flex-1 p-2 bg-white">
+                              <div className="h-1.5 bg-gray-400 rounded w-3/4 mb-2"></div>
+                              <div className="h-1 bg-gray-300 rounded w-full mb-1"></div>
+                            </div>
+                          </div>
+                        )}
+                        {key === 'minimal' && (
+                          <div className="p-4 text-center">
+                            <div className="h-2 bg-gray-400 rounded w-2/3 mx-auto mb-2"></div>
+                            <div className="h-1 bg-gray-300 rounded w-1/2 mx-auto mb-3"></div>
+                            <div className="h-1 bg-gray-300 rounded w-full mb-1"></div>
+                            <div className="h-1 bg-gray-300 rounded w-4/5 mx-auto"></div>
+                          </div>
+                        )}
+                        {key === 'professional' && (
+                          <div className="flex h-full">
+                            <div className="w-1 bg-blue-500"></div>
+                            <div className="flex-1 p-3">
+                              <div className="flex gap-2 mb-2">
+                                <div className="w-8 h-8 bg-gray-300 rounded"></div>
+                                <div className="flex-1">
+                                  <div className="h-1.5 bg-gray-400 rounded w-3/4 mb-1"></div>
+                                  <div className="h-1 bg-gray-300 rounded w-1/2"></div>
+                                </div>
+                              </div>
+                              <div className="h-1 bg-gray-300 rounded w-full mb-1"></div>
+                              <div className="h-1 bg-gray-300 rounded w-5/6"></div>
+                            </div>
+                          </div>
+                        )}
                       </div>
                     </button>
                   ))}
@@ -848,8 +1473,14 @@ const ResumePortfolioBuilder = () => {
               className={`${templates[selectedTemplate].bg} p-8 rounded-xl shadow-lg overflow-y-auto max-h-[calc(100vh-200px)] custom-scrollbar`}
               style={{ fontFamily: customization.fontFamily }}
             >
+            {selectedTemplate === 'classic' && renderClassicLayout()}
+            {selectedTemplate === 'modern' && renderModernLayout()}
+            {selectedTemplate === 'creative' && renderCreativeLayout()}
+            {selectedTemplate === 'minimal' && renderMinimalLayout()}
+            {selectedTemplate === 'professional' && renderProfessionalLayout()}
+
               {/* Header Section */}
-              <div className={`${templates[selectedTemplate].headerBg} p-6 rounded-xl mb-6 shadow-md`}>
+              {/* <div className={`${templates[selectedTemplate].headerBg} p-6 rounded-xl mb-6 shadow-md`}>
                 <div className="flex items-start gap-6">
                   {profileImage && (
                     <img src={profileImage} alt="Profile" className="w-24 h-24 rounded-full object-cover shadow-lg" />
@@ -868,9 +1499,9 @@ const ResumePortfolioBuilder = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
 
-              {/* About Section */}
+              {/* About Section
               {resumeData.personal.about && (
                 <div className="mb-6">
                   <h2 className="text-xl font-bold mb-3 pb-2 border-b-2" style={{ borderColor: customization.primaryColor }}>
@@ -878,9 +1509,9 @@ const ResumePortfolioBuilder = () => {
                   </h2>
                   <p className="text-gray-700 leading-relaxed">{resumeData.personal.about}</p>
                 </div>
-              )}
+              )} */}
 
-              {/* Experience Section */}
+              {/* Experience Section
               {resumeData.experience.length > 0 && (
                 <div className="mb-6">
                   <h2 className="text-xl font-bold mb-3 pb-2 border-b-2" style={{ borderColor: customization.primaryColor }}>
@@ -899,9 +1530,9 @@ const ResumePortfolioBuilder = () => {
                     </div>
                   ))}
                 </div>
-              )}
+              )} */}
 
-              {/* Education Section */}
+              {/* Education Section
               {resumeData.education.length > 0 && (
                 <div className="mb-6">
                   <h2 className="text-xl font-bold mb-3 pb-2 border-b-2" style={{ borderColor: customization.primaryColor }}>
@@ -920,9 +1551,9 @@ const ResumePortfolioBuilder = () => {
                     </div>
                   ))}
                 </div>
-              )}
+              )} */}
 
-              {/* Skills Section */}
+              {/* Skills Section
               {resumeData.skills.length > 0 && (
                 <div className="mb-6">
                   <h2 className="text-xl font-bold mb-3 pb-2 border-b-2" style={{ borderColor: customization.primaryColor }}>
@@ -948,9 +1579,9 @@ const ResumePortfolioBuilder = () => {
                     ))}
                   </div>
                 </div>
-              )}
+              )} */}
 
-              {/* Projects Section */}
+              {/* Projects Section
               {resumeData.projects.length > 0 && (
                 <div className="mb-6">
                   <h2 className="text-xl font-bold mb-3 pb-2 border-b-2" style={{ borderColor: customization.primaryColor }}>
@@ -968,7 +1599,7 @@ const ResumePortfolioBuilder = () => {
                     </div>
                   ))}
                 </div>
-              )}
+              )} */}
 
               {/* Portfolio Section (if included) */}
               {includePortfolio && portfolioProjects.length > 0 && (
