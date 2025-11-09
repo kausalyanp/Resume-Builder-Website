@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { User, Briefcase, GraduationCap, Code, Award, Settings, Download, Trash2, Plus, X, Moon, Sun, Github, Eye, Layout, Palette, Type, Upload, FileImage, ExternalLink } from 'lucide-react';
+import { User, Briefcase, GraduationCap, Code, Award, Settings, Download, Trash2, Plus, X, Moon, Sun, Github, Eye, Layout, Palette, Type, Upload, FileImage, ExternalLink, Sparkles, ArrowRight, Zap } from 'lucide-react';
 
 const ResumePortfolioBuilder = () => {
   const [activeTab, setActiveTab] = useState('resume');
@@ -7,6 +7,8 @@ const ResumePortfolioBuilder = () => {
   const [selectedTemplate, setSelectedTemplate] = useState('classic');
   const [profileImage, setProfileImage] = useState('');
   const [includePortfolio, setIncludePortfolio] = useState(false);
+  const [showBuilder, setShowBuilder] = useState(false);
+
   
   const [resumeData, setResumeData] = useState({
     personal: { name: '', title: '', email: '', phone: '', location: '', about: '' },
@@ -25,6 +27,8 @@ const ResumePortfolioBuilder = () => {
   });
 
   const previewRef = useRef(null);
+  const builderRef = useRef(null);
+
 
   // Load external scripts for PDF generation
   useEffect(() => {
@@ -77,6 +81,15 @@ const ResumePortfolioBuilder = () => {
   useEffect(() => {
     if (profileImage) localStorage.setItem('profileImage', profileImage);
   }, [profileImage]);
+
+
+  const scrollToBuilder = () => {
+    setShowBuilder(true);
+    setTimeout(() => {
+      builderRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
+  };
+
 
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
@@ -188,13 +201,13 @@ const ResumePortfolioBuilder = () => {
         {profileImage && (
           <img src={profileImage} alt="Profile" className="w-24 h-24 rounded-full object-cover mx-auto mb-4 shadow-lg" />
         )}
-        <h1 className="text-3xl font-bold text-gray-800 mb-2">
+        <h1 className="text-3xl font-bold mb-2">
           {resumeData.personal.name || 'Your Name'}
         </h1>
         <p className="text-lg mb-3" style={{ color: customization.primaryColor }}>
           {resumeData.personal.title || 'Professional Title'}
         </p>
-        <div className="flex flex-wrap justify-center gap-4 text-sm text-gray-600">
+        <div className="flex flex-wrap justify-center gap-4 text-sm">
           {resumeData.personal.email && <span>📧 {resumeData.personal.email}</span>}
           {resumeData.personal.phone && <span>📱 {resumeData.personal.phone}</span>}
           {resumeData.personal.location && <span>📍 {resumeData.personal.location}</span>}
@@ -204,23 +217,23 @@ const ResumePortfolioBuilder = () => {
       {/* About */}
       {resumeData.personal.about && (
         <div className="mb-6">
-          <h2 className="text-xl font-bold mb-3 text-gray-800" style={{ color: customization.primaryColor }}>ABOUT ME</h2>
-          <p className="text-gray-700 leading-relaxed">{resumeData.personal.about}</p>
+          <h2 className="text-xl font-bold mb-3" style={{ color: customization.primaryColor }}>ABOUT ME</h2>
+          <p className="leading-relaxed">{resumeData.personal.about}</p>
         </div>
       )}
 
       {/* Experience */}
       {resumeData.experience.length > 0 && (
         <div className="mb-6">
-          <h2 className="text-xl font-bold mb-3 text-gray-800" style={{ color: customization.primaryColor }}>EXPERIENCE</h2>
+          <h2 className="text-xl font-bold mb-3" style={{ color: customization.primaryColor }}>EXPERIENCE</h2>
           {resumeData.experience.map((exp, idx) => (
             <div key={idx} className="mb-4">
               <div className="flex justify-between items-start mb-1">
                 <h3 className="text-lg font-semibold">{exp.title}</h3>
-                <span className="text-sm text-gray-600">{exp.duration}</span>
+                <span className="text-sm">{exp.duration}</span>
               </div>
               <p className="font-medium mb-2" style={{ color: customization.primaryColor }}>{exp.company}</p>
-              <p className="text-gray-700 text-sm">{exp.description}</p>
+              <p className="text-sm">{exp.description}</p>
             </div>
           ))}
         </div>
@@ -229,15 +242,15 @@ const ResumePortfolioBuilder = () => {
       {/* Education */}
       {resumeData.education.length > 0 && (
         <div className="mb-6">
-          <h2 className="text-xl font-bold mb-3 text-gray-800" style={{ color: customization.primaryColor }}>EDUCATION</h2>
+          <h2 className="text-xl font-bold mb-3" style={{ color: customization.primaryColor }}>EDUCATION</h2>
           {resumeData.education.map((edu, idx) => (
             <div key={idx} className="mb-3">
               <div className="flex justify-between items-start mb-1">
                 <h3 className="text-lg font-semibold">{edu.degree}</h3>
-                <span className="text-sm text-gray-600">{edu.year}</span>
+                <span className="text-sm">{edu.year}</span>
               </div>
               <p className="font-medium" style={{ color: customization.primaryColor }}>{edu.institution}</p>
-              {edu.gpa && <p className="text-sm text-gray-600">GPA: {edu.gpa}</p>}
+              {edu.gpa && <p className="text-sm">GPA: {edu.gpa}</p>}
             </div>
           ))}
         </div>
@@ -246,13 +259,13 @@ const ResumePortfolioBuilder = () => {
       {/* Skills */}
       {resumeData.skills.length > 0 && (
         <div className="mb-6">
-          <h2 className="text-xl font-bold mb-3 text-gray-800" style={{ color: customization.primaryColor }}>SKILLS</h2>
+          <h2 className="text-xl font-bold mb-3" style={{ color: customization.primaryColor }}>SKILLS</h2>
           <div className="space-y-3">
             {resumeData.skills.map((skill, idx) => (
               <div key={idx}>
                 <div className="flex justify-between mb-1">
                   <span className="font-medium">{skill.name}</span>
-                  <span className="text-sm text-gray-600">{skill.level}%</span>
+                  <span className="text-sm">{skill.level}%</span>
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-2">
                   <div className="h-2 rounded-full" style={{ width: `${skill.level}%`, backgroundColor: customization.primaryColor }} />
@@ -266,11 +279,11 @@ const ResumePortfolioBuilder = () => {
       {/* Projects */}
       {resumeData.projects.length > 0 && (
         <div className="mb-6">
-          <h2 className="text-xl font-bold mb-3 text-gray-800" style={{ color: customization.primaryColor }}>PROJECTS</h2>
+          <h2 className="text-xl font-bold mb-3" style={{ color: customization.primaryColor }}>PROJECTS</h2>
           {resumeData.projects.map((project, idx) => (
             <div key={idx} className="mb-3">
               <h3 className="text-lg font-semibold mb-1">{project.title}</h3>
-              <p className="text-gray-700 text-sm mb-1">{project.description}</p>
+              <p className="text-sm mb-1">{project.description}</p>
               {project.technologies && <p className="text-sm" style={{ color: customization.primaryColor }}>Technologies: {project.technologies}</p>}
             </div>
           ))}
@@ -288,7 +301,7 @@ const ResumePortfolioBuilder = () => {
           {profileImage && (
             <img src={profileImage} alt="Profile" className="w-full aspect-square rounded-lg object-cover mb-4 shadow-lg" />
           )}
-          <h1 className="text-2xl font-bold text-gray-800 mb-1">
+          <h1 className="text-2xl font-bold mb-1">
             {resumeData.personal.name || 'Your Name'}
           </h1>
           <p className="text-base font-medium mb-3" style={{ color: customization.primaryColor }}>
@@ -298,8 +311,8 @@ const ResumePortfolioBuilder = () => {
 
         {/* Contact */}
         <div className="mb-6">
-          <h2 className="text-sm font-bold mb-3 text-gray-800 uppercase tracking-wide">Contact</h2>
-          <div className="space-y-2 text-xs text-gray-700">
+          <h2 className="text-sm font-bold mb-3 uppercase tracking-wide">Contact</h2>
+          <div className="space-y-2 text-xs">
             {resumeData.personal.email && <div className="flex items-start gap-2"><span>📧</span><span className="break-all">{resumeData.personal.email}</span></div>}
             {resumeData.personal.phone && <div className="flex items-start gap-2"><span>📱</span><span>{resumeData.personal.phone}</span></div>}
             {resumeData.personal.location && <div className="flex items-start gap-2"><span>📍</span><span>{resumeData.personal.location}</span></div>}
@@ -309,7 +322,7 @@ const ResumePortfolioBuilder = () => {
         {/* Skills */}
         {resumeData.skills.length > 0 && (
           <div className="mb-6">
-            <h2 className="text-sm font-bold mb-3 text-gray-800 uppercase tracking-wide">Skills</h2>
+            <h2 className="text-sm font-bold mb-3 uppercase tracking-wide">Skills</h2>
             <div className="space-y-2">
               {resumeData.skills.map((skill, idx) => (
                 <div key={idx}>
@@ -329,13 +342,13 @@ const ResumePortfolioBuilder = () => {
         {/* Education */}
         {resumeData.education.length > 0 && (
           <div className="mb-6">
-            <h2 className="text-sm font-bold mb-3 text-gray-800 uppercase tracking-wide">Education</h2>
+            <h2 className="text-sm font-bold mb-3 uppercase tracking-wide">Education</h2>
             {resumeData.education.map((edu, idx) => (
               <div key={idx} className="mb-3 text-xs">
                 <h3 className="font-semibold text-sm">{edu.degree}</h3>
                 <p className="font-medium" style={{ color: customization.primaryColor }}>{edu.institution}</p>
-                <p className="text-gray-600">{edu.year}</p>
-                {edu.gpa && <p className="text-gray-600">GPA: {edu.gpa}</p>}
+                <p>{edu.year}</p>
+                {edu.gpa && <p>GPA: {edu.gpa}</p>}
               </div>
             ))}
           </div>
@@ -347,23 +360,23 @@ const ResumePortfolioBuilder = () => {
         {/* About */}
         {resumeData.personal.about && (
           <div className="mb-6">
-            <h2 className="text-lg font-bold mb-3 text-gray-800 uppercase tracking-wide" style={{ color: customization.primaryColor }}>About Me</h2>
-            <p className="text-gray-700 leading-relaxed text-sm">{resumeData.personal.about}</p>
+            <h2 className="text-lg font-bold mb-3 uppercase tracking-wide" style={{ color: customization.primaryColor }}>About Me</h2>
+            <p className="leading-relaxed text-sm">{resumeData.personal.about}</p>
           </div>
         )}
 
         {/* Experience */}
         {resumeData.experience.length > 0 && (
           <div className="mb-6">
-            <h2 className="text-lg font-bold mb-3 text-gray-800 uppercase tracking-wide" style={{ color: customization.primaryColor }}>Experience</h2>
+            <h2 className="text-lg font-bold mb-3 uppercase tracking-wide" style={{ color: customization.primaryColor }}>Experience</h2>
             {resumeData.experience.map((exp, idx) => (
               <div key={idx} className="mb-4 relative pl-4 border-l-2" style={{ borderColor: customization.primaryColor }}>
                 <div className="flex justify-between items-start mb-1">
                   <h3 className="font-semibold">{exp.title}</h3>
-                  <span className="text-xs text-gray-600 whitespace-nowrap ml-2">{exp.duration}</span>
+                  <span className="text-xs whitespace-nowrap ml-2">{exp.duration}</span>
                 </div>
                 <p className="font-medium text-sm mb-2" style={{ color: customization.primaryColor }}>{exp.company}</p>
-                <p className="text-gray-700 text-sm">{exp.description}</p>
+                <p className="text-sm">{exp.description}</p>
               </div>
             ))}
           </div>
@@ -372,11 +385,11 @@ const ResumePortfolioBuilder = () => {
         {/* Projects */}
         {resumeData.projects.length > 0 && (
           <div className="mb-6">
-            <h2 className="text-lg font-bold mb-3 text-gray-800 uppercase tracking-wide" style={{ color: customization.primaryColor }}>Projects</h2>
+            <h2 className="text-lg font-bold mb-3 uppercase tracking-wide" style={{ color: customization.primaryColor }}>Projects</h2>
             {resumeData.projects.map((project, idx) => (
               <div key={idx} className="mb-3">
                 <h3 className="font-semibold mb-1">{project.title}</h3>
-                <p className="text-gray-700 text-sm mb-1">{project.description}</p>
+                <p className="text-sm mb-1">{project.description}</p>
                 {project.technologies && <p className="text-xs" style={{ color: customization.primaryColor }}>Technologies: {project.technologies}</p>}
               </div>
             ))}
@@ -907,6 +920,7 @@ const ResumePortfolioBuilder = () => {
 
   return (
     <div className={`min-h-screen ${darkMode ? 'bg-gray-900 text-white' : 'bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50'} transition-all duration-300`} style={{ fontFamily: customization.fontFamily }}>
+
       {/* Header */}
       <header className={`${darkMode ? 'bg-gray-800' : 'bg-white/80 backdrop-blur-lg'} shadow-lg sticky top-0 z-50`}>
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
@@ -945,11 +959,66 @@ const ResumePortfolioBuilder = () => {
         </div>
       </header>
 
+      {/* Hero Section */}
+      <section className="relative overflow-hidden pt-32 pb-20 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
+        <div className="absolute inset-0">
+          <div className="absolute top-20 left-10 w-72 h-72 bg-blue-400/20 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-400/20 rounded-full blur-3xl"></div>
+        </div>
+        
+        <div className="relative max-w-7xl mx-auto px-6">
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-100 rounded-full mb-6">
+              <Sparkles className="w-4 h-4 text-blue-600" />
+              <span className="text-sm font-medium text-blue-600">Free Forever • No Sign Up</span>
+            </div>
+            
+            <h1 className="text-6xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+              Build Your Dream Resume
+            </h1>
+            
+            <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+              Create professional resumes in minutes. Multiple templates, live preview, and instant PDF download.
+            </p>
+            
+            <button 
+              onClick={scrollToBuilder}
+              className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-semibold text-lg hover:shadow-2xl hover:scale-105 transition-all inline-flex items-center gap-2"
+            >
+              Start Building Now
+              <ArrowRight className="w-5 h-5" />
+            </button>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 mt-20">
+            <div className="bg-white/60 backdrop-blur-lg rounded-2xl p-6">
+              <Zap className="w-12 h-12 text-blue-600 mb-4" />
+              <h3 className="text-xl font-bold mb-2">Lightning Fast</h3>
+              <p className="text-gray-600">Create resumes in under 5 minutes</p>
+            </div>
+            
+            <div className="bg-white/60 backdrop-blur-lg rounded-2xl p-6">
+              <Layout className="w-12 h-12 text-purple-600 mb-4" />
+              <h3 className="text-xl font-bold mb-2">Multiple Templates</h3>
+              <p className="text-gray-600">Choose from professional layouts</p>
+            </div>
+            
+            <div className="bg-white/60 backdrop-blur-lg rounded-2xl p-6">
+              <Download className="w-12 h-12 text-pink-600 mb-4" />
+              <h3 className="text-xl font-bold mb-2">Export to PDF</h3>
+              <p className="text-gray-600">Download high-quality PDFs</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-6 py-8">
+      <div ref={builderRef} className="max-w-7xl mx-auto px-6 py-8">
         <div className="grid lg:grid-cols-2 gap-8">
+
           {/* Left Panel - Form */}
           <div className={`${darkMode ? 'bg-gray-800' : 'bg-white/60 backdrop-blur-lg'} rounded-2xl shadow-xl p-6`}>
+
             {/* Tabs */}
             <div className="flex gap-2 mb-6 overflow-x-auto">
               {['resume', 'portfolio', 'templates', 'customize'].map(tab => (
@@ -1443,7 +1512,7 @@ const ResumePortfolioBuilder = () => {
                   </div>
 
                   <div className="grid grid-cols-3 gap-3">
-                    {['#3b82f6', '#8b5cf6', '#ec4899', '#f59e0b', '#10b981', '#ef4444'].map(color => (
+                    {['#3b82f6', '#8b5cf6', '#ec4899', '#f59e0b', '#10b981', '#ef4444', 'gray','black','#4c4852', 'white', '#c8c6cc', '#e5e4e7'].map(color => (
                       <button
                         key={color}
                         onClick={() => setCustomization(prev => ({ ...prev, primaryColor: color }))}
@@ -1470,9 +1539,11 @@ const ResumePortfolioBuilder = () => {
             
             <div
               ref={previewRef}
-              className={`${templates[selectedTemplate].bg} p-8 rounded-xl shadow-lg overflow-y-auto max-h-[calc(100vh-200px)] custom-scrollbar`}
-              style={{ fontFamily: customization.fontFamily }}
+              className={`resume-preview-zone ${templates[selectedTemplate].bg} ${darkMode ? 'bg-gray-800' : 'bg-white/60 backdrop-blur-lg'} p-8 rounded-xl shadow-lg overflow-y-auto max-h-[calc(100vh-200px)] custom-scrollbar`}
+              style={{ '--resume-font': customization.fontFamily }}
+                
             >
+
             {selectedTemplate === 'classic' && renderClassicLayout()}
             {selectedTemplate === 'modern' && renderModernLayout()}
             {selectedTemplate === 'creative' && renderCreativeLayout()}
@@ -1641,6 +1712,68 @@ const ResumePortfolioBuilder = () => {
         </div>
       </div>
 
+      
+      {/* Footer */}
+      <footer className="relative bg-gradient-to-br from-gray-900 to-gray-800 text-white py-16 mt-20">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid md:grid-cols-4 gap-8 mb-12">
+            <div className="col-span-2">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                  <Briefcase className="w-7 h-7 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold">Resume Builder Pro</h3>
+              </div>
+              <p className="text-gray-400 mb-6 max-w-md">
+                Create professional resumes that get you hired. Free, fast, and easy to use. No account required.
+              </p>
+              <div className="flex gap-4">
+                <a href="#" className="w-10 h-10 bg-gray-800 hover:bg-gray-700 rounded-lg flex items-center justify-center transition-colors">
+                  <Github className="w-5 h-5" />
+                </a>
+                <a href="#" className="w-10 h-10 bg-gray-800 hover:bg-gray-700 rounded-lg flex items-center justify-center transition-colors">
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path></svg>
+                </a>
+              </div>
+            </div>
+
+            <div>
+              <h4 className="text-lg font-semibold mb-4">Product</h4>
+              <ul className="space-y-3">
+                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Templates</a></li>
+                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Features</a></li>
+                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Examples</a></li>
+                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Pricing</a></li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="text-lg font-semibold mb-4">Company</h4>
+              <ul className="space-y-3">
+                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">About Us</a></li>
+                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Blog</a></li>
+                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Careers</a></li>
+                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Contact</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="border-t border-gray-700 pt-8">
+            <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+              <p className="text-gray-400 text-sm">
+                © 2024 Resume Builder Pro. All rights reserved.
+              </p>
+              <div className="flex gap-6 text-sm">
+                <a href="#" className="text-gray-400 hover:text-white transition-colors">Privacy Policy</a>
+                <a href="#" className="text-gray-400 hover:text-white transition-colors">Terms of Service</a>
+                <a href="#" className="text-gray-400 hover:text-white transition-colors">Cookie Policy</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+
       <style jsx>{`
         .custom-scrollbar::-webkit-scrollbar {
           width: 8px;
@@ -1657,7 +1790,9 @@ const ResumePortfolioBuilder = () => {
           background: ${customization.primaryColor}dd;
         }
       `}</style>
+
     </div>
+
   );
 };
 
