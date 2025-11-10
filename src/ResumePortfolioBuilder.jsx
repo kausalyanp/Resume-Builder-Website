@@ -930,7 +930,7 @@ const ResumePortfolioBuilder = () => {
             </div>
             <div>
               <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                Resume Builder Pro
+                Rezoom
               </h1>
               <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Create your perfect resume</p>
             </div>
