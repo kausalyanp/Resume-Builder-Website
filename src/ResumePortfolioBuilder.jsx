@@ -1722,7 +1722,7 @@ const ResumePortfolioBuilder = () => {
                 <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
                   <Briefcase className="w-7 h-7 text-white" />
                 </div>
-                <h3 className="text-2xl font-bold">Resume Builder Pro</h3>
+                <h3 className="text-2xl font-bold">Rezoom</h3>
               </div>
               <p className="text-gray-400 mb-6 max-w-md">
                 Create professional resumes that get you hired. Free, fast, and easy to use. No account required.
@@ -1761,7 +1761,7 @@ const ResumePortfolioBuilder = () => {
           <div className="border-t border-gray-700 pt-8">
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
               <p className="text-gray-400 text-sm">
-                © 2025 Resume Builder Pro. All rights reserved.
+                © 2025 Rezoom. All rights reserved.
               </p>
               <div className="flex gap-6 text-sm">
                 <a href="#" className="text-gray-400 hover:text-white transition-colors">Privacy Policy</a>
