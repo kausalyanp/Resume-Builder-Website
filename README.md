@@ -38,7 +38,7 @@ Run the website: https://kausalyanp.github.io/Resume-Builder-Website/
 
 ## 🖼️ Screenshots
 
-| Resume Builder | Portfolio Builder | PDF Export |
+| Image 1 | Image 2 | Image 3 |
 |----------------|------------------|-------------|
 | <img width="1892" height="852" alt="image" src="https://github.com/user-attachments/assets/7aa296bb-9b08-412f-aba5-e69a3deb46b6" /> | <img width="1896" height="857" alt="image" src="https://github.com/user-attachments/assets/fe0411a4-aabb-433b-b356-83e3665d53ad" /> | <img width="1883" height="841" alt="image" src="https://github.com/user-attachments/assets/4e21274c-80b5-413b-b01c-881ca026cf5c" />
  
