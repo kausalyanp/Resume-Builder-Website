@@ -49,63 +49,41 @@ Run the website: https://kausalyanp.github.io/Resume-Builder-Website/
 | Category | Technologies |
 |-----------|--------------|
 | **Frontend** | React.js (Hooks + Context API), HTML5, CSS3 (Flexbox & Grid) |
-| **State Management** | Context API / Redux (optional) |
 | **Styling** | Advanced CSS, CSS Variables, Framer Motion |
 | **PDF Export** | html2canvas, jsPDF |
 | **Storage** | LocalStorage |
 | **Icons** | Lucide React / FontAwesome |
-| **Deployment** | Vercel / Netlify |
+| **Deployment** | Github |
 
 ---
 
 ## 🧩 Project Structure
+```
 src/
 ├── components/
-
 │ ├── ResumeForm.jsx
-
 │ ├── ResumePreview.jsx
-
 │ ├── TemplateSelector.jsx
-
 │ ├── PortfolioForm.jsx
-
 │ ├── PortfolioPreview.jsx
-
 │ ├── Sidebar.jsx
-
 │ ├── Navbar.jsx
-
 │ └── PDFExportButton.jsx
-
 ├── pages/
-
 │ ├── Home.jsx
-
 │ ├── ResumeBuilder.jsx
-
 │ ├── PortfolioBuilder.jsx
-
 │ ├── Preview.jsx
-
 │ └── Settings.jsx
-
 ├── styles/
-
 │ ├── global.css
-
 │ ├── variables.css
-
 │ └── templates.css
-
 ├── utils/
-
 │ └── pdfGenerator.js
-
 ├── App.js
-
 └── index.js
-
+```
 
 ---
 
