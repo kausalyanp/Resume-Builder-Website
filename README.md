@@ -40,10 +40,10 @@ Run the website: https://kausalyanp.github.io/Resume-Builder-Website/
 
 | Resume Builder | Portfolio Builder | PDF Export |
 |----------------|------------------|-------------|
-| <img width="1758" height="938" alt="image" src="https://github.com/user-attachments/assets/033bd75e-5cd0-4acf-8b1b-acfcfc6909f1" /> | <img width="1746" height="926" alt="image" src="https://github.com/user-attachments/assets/f186f3a0-a8d5-4c89-bf27-9c3569477e7b" /> | <img width="1722" height="853" alt="image" src="https://github.com/user-attachments/assets/4218c606-15a9-45f6-a98d-0672aa76bffe" /> 
-
-> 📸 *Screenshots are for illustration — update with your actual project images.*
-
+| <img width="1892" height="852" alt="image" src="https://github.com/user-attachments/assets/7aa296bb-9b08-412f-aba5-e69a3deb46b6" />
+" /> | <img width="1896" height="857" alt="image" src="https://github.com/user-attachments/assets/fe0411a4-aabb-433b-b356-83e3665d53ad" />
+ /> | <img width="1883" height="841" alt="image" src="https://github.com/user-attachments/assets/4e21274c-80b5-413b-b01c-881ca026cf5c" />
+ 
 ---
 
 ## 🏗️ Tech Stack
