@@ -104,25 +104,33 @@ By building this project, you’ll master:
 
 ### 🧰 Prerequisites
 - Node.js (v18+)
-- npm or yarn
+- npm
 
 ### 💻 Installation
-```bash
+```
 # Clone this repository
-git clone https://github.com/kausalyanp/smart-resume-builder.git
+git clone https://github.com/kausalyanp/resume-builder-website.git
 
 # Navigate to project folder
-cd smart-resume-builder
+cd resume-builder-website
 
 # Install dependencies
-npm install
+npm install -D tailwindcss@3.4.10 postcss autoprefixer
 
-# Start the development server
-npm start
+# Start the development server(run in localhost)
+npm run dev
 ```
 ### 🛠️ Build for Production
 ```
+git add.
+
+git commit -m "Commit message"
+
+git push -u origin main
+
 npm run build
+
+npm run deploy
 ```
 ### 📦 Dependencies
 ```
@@ -133,6 +141,7 @@ npm run build
   "jspdf": "^2.5.2",
   "html2canvas": "^1.4.1",
   "lucide-react": "^0.300.0"
+  "tailwind": "^3.4.10"
 }
 ```
 ---
