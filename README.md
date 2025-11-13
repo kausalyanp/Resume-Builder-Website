@@ -59,30 +59,13 @@ Run the website: https://kausalyanp.github.io/Resume-Builder-Website/
 
 ## 🧩 Project Structure
 ```
-src/
-├── components/
-│ ├── ResumeForm.jsx
-│ ├── ResumePreview.jsx
-│ ├── TemplateSelector.jsx
-│ ├── PortfolioForm.jsx
-│ ├── PortfolioPreview.jsx
-│ ├── Sidebar.jsx
-│ ├── Navbar.jsx
-│ └── PDFExportButton.jsx
-├── pages/
-│ ├── Home.jsx
-│ ├── ResumeBuilder.jsx
-│ ├── PortfolioBuilder.jsx
-│ ├── Preview.jsx
-│ └── Settings.jsx
-├── styles/
-│ ├── global.css
-│ ├── variables.css
-│ └── templates.css
-├── utils/
-│ └── pdfGenerator.js
-├── App.js
-└── index.js
+/
+├── src/
+│ ├── index.css
+│ ├── app.css
+│ ├── main.jsx
+│ ├── index.jsx
+│ ├── ResumeBuilderApp.jsx
 ```
 
 ---
